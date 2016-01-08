@@ -1,0 +1,19 @@
+{
+  "name": "eddy-tool-frontend",
+  "version": "1.0.0",
+  "description": "Agar.io user script for team play",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "agar.io"
+  ],
+  "author": "Eddy0402",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "grunt-browserify": "^4.0.1"
+  },
+  "dependencies": {
+    "uglify": "^0.1.5"
+  }
+}

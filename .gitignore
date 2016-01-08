@@ -1,0 +1,8 @@
+# vim
+.*.sw?
+
+# npm
+node_modules
+
+# dev output
+dev
