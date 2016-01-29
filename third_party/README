@@ -1,0 +1,7 @@
+File                       | Library           | License    | Author
+---------------------------------------------------------------------------------------------------------------------------------
+discord.min.3.10.2.js      | discord.js        | Apache 2.0 |
+jscolor.js                 | jscolor.js        | GNU GPL v3 |
+jquery.noty.package.min.js | noty              | MIT        |
+misc.js                    | addWheelListener  | not_sure   | from MDN: https://developer.mozilla.org/zh-TW/docs/Web/Events/wheel
+
