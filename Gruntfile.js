@@ -1,16 +1,11 @@
 module.exports = function(grunt) {
     require('google-closure-compiler').grunt(grunt);
-    // Project configuration.
+
     grunt.initConfig({
         'pkg': grunt.file.readJSON('package.json'),
         'browserify': {
             options: {
-                debug: true,
                 extensions: ['.js'],
-            },
-            dev: {
-                src: ['src/**/*.js'],
-                dest: 'dev/main.js',
             },
             dist: {
                 options: {
@@ -18,6 +13,15 @@ module.exports = function(grunt) {
                 },
                 src: ['build/**/*.min.js'],
                 dest: 'dist/main.js',
+            },
+            dev: {
+                options: {
+                    debug: true,
+                    keepAlive: 'true',
+                    watch: 'true',
+                },
+                src: ['./src/**/*.js'],
+                dest: 'dev/main.js',
             },
         },
         'closure-compiler': {
@@ -36,10 +40,9 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-browserify');
-    //grunt.loadNpmTasks('grunt-closure-compiler');
 
     // Default task(s).
     grunt.registerTask('default', ['browserify:dev']);
-    grunt.registerTask('dist', ['browserify:dist','closure-compiler:dist']);
+    grunt.registerTask('dist', ['closure-compiler:dist','browserify:dist']);
 
 };
