@@ -33,9 +33,6 @@ function LoadPlugin(GM, Config){
                 'notytheme.js',
             ],
         },
-        assets:{
-            base: Config.resource_base + 'assets/',
-        },
     }
 
     function loadHTML(url, callback, isCached){
@@ -64,7 +61,7 @@ function LoadPlugin(GM, Config){
     }
 
     loadHTML(Resource.html.base + Resource.html.initHead,function(initHead){
-        ui.initBlank(Resource.assets.base, initHead);
+        ui.initBlank(Config.resource_base, initHead);
 
         loadHTML(Resource.html.base + Resource.html.load,function(load){
                 ui.loadAnimation.start(load);
@@ -74,9 +71,10 @@ function LoadPlugin(GM, Config){
         var pending = Resource.thirdParty.list.length;
         for(var i = 0,l = pending;i < l;++i){
             loadScript(Resource.thirdParty.base+ Resource.thirdParty.list[i], function(){
-                if(--pending){
+                if(--pending == 0){
                     /* all library loaded, start main process */
                     Init();
+                    console.log('Plugin loaded, enjoy!');
                     ui.loadAnimation.end();
                 }
             });

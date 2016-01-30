@@ -13,7 +13,8 @@ var ui = {
             $('body').append(html_load);
         },
         end: function(){
-
+            setTimeout(function(){$('#loadOverlay').addClass('loadComplete')}, 0);
+            setTimeout(function(){$('#loadOverlay').remove()}, 1000);
         },
         progress: function(){
 
