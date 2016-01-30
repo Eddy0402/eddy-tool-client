@@ -37,12 +37,40 @@ module.exports = function(grunt) {
                 },
             }
         },
+        'compass': {
+            options: {
+                sassDir: 'sass',
+            },
+            dist: {
+                options: {
+                    environment: 'production',
+                    outputStyle: 'compress',
+                    cssDir: 'dist/css',
+                },
+            },
+            dev: {
+                options: {
+                    watch: true,
+                    cssDir: 'dev/css',
+                },
+            },
+        },
+        'concurrent': {
+            options: {
+                logConcurrentOutput: true,
+            },
+            dev: {
+                tasks: ['browserify:dev', 'compass:dev'],
+            },
+        },
     });
 
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     // Default task(s).
-    grunt.registerTask('default', ['browserify:dev']);
-    grunt.registerTask('dist', ['closure-compiler:dist','browserify:dist']);
+    grunt.registerTask('default', ['concurrent:dev']);
+    grunt.registerTask('dist', ['closure-compiler:dist', 'browserify:dist', 'compass:dist']);
 
 };
