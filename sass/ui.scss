@@ -1,0 +1,603 @@
+@import url(//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css);
+
+/* ============================= Fonts ============================= */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskaithi.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskannadaui.css);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:500);
+
+@font-face {
+  font-family: 'cwTeXHei';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.eot);
+  src: url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.eot?#iefix) format('embedded-opentype'),
+  url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.ttf) format('truetype');
+}
+
+body{
+  overflow: hidden;
+  font-family: 'cwTeXHei', 'Ubuntu' ,'Noto Sans Kannada UI', sans-serif;
+}
+
+/* ============================= i18n ============================= */
+
+body[data-lang=zhtw] [data-lang]:not([data-lang=zhtw]){
+  display: none;
+}
+body[data-lang=en] [data-lang]:not([data-lang=en]){
+  display: none;
+}
+
+/* ============================= Misc ============================= */
+option{
+  white-space: pre;
+}
+label{
+  font-weight: initial;
+}
+.hide {
+  display: none;
+}
+.well{
+  background-color: #444444;
+}
+.firstcharacter {
+  float: left;
+  color: #903;
+  font-size: 50px;
+  padding-top: 9px;
+  padding-right: 9px;
+  font-family: Georgia;
+}
+.form-group{
+  width: 100%;
+}
+.form-control{
+  background-color: #4D4D4D;
+  color: #D9D9D9;
+  border: 1px solid #6F6F6F;
+}
+.form-control[disabled]{
+  background-color: #232323;
+}
+.input-group-addon{
+  background-color: #818181;
+  color: #FFFFFF;
+  border: 1px solid #6F6F6F;
+}
+
+.btn{
+  color: #222222;
+  background-color: #818181;
+  border-color: #818181;
+}
+
+.btn-facebook{
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+.btn-googleplus{
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.btn:hover, .btn-hover{
+  background-color: #757575;
+  color: #CD0000;
+}
+
+.glyphicon{
+  line-height: 1.42857143;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 3px double #575656;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #888888;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px double #575656;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Check box */
+
+input[type="checkbox"] {
+  -webkit-appearance:none;/* Hides the default checkbox style */ 
+  height:12px;
+  width:12px;
+  cursor:pointer;
+  position:relative;
+  -webkit-transition: .15s;
+  border-style: none;
+  border-radius:2em;
+  background-color:#900;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #4D4D4D;
+}
+
+input[type="checkbox"]:before, input[type="checkbox"]:checked:before {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  font-size: 12px;
+  line-height:12px;
+  text-align:center;
+  color:#D9D9D();
+  content: '\2718';
+}
+
+input[type="checkbox"]:checked:before {
+  content: '\2714';
+}
+
+input[type="checkbox"]:hover:before {
+  background:rgba(255,255,255,0.3);
+}
+
+/* Range slide */
+
+input[type=range].slider {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 3.05px 0;
+}
+input[type=range].slider:focus {
+  outline: none;
+}
+input[type=range].slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6.9px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #484d4d;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+input[type=range].slider::-webkit-slider-thumb {
+  box-shadow: 0px 0px 1px #670000, 0px 0px 0px #810000;
+  border: 0px solid #ff1e00;
+  height: 13px;
+  width: 21px;
+  border-radius: 0px;
+  background: rgba(244, 83, 89, 0.93);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.05px;
+}
+input[type=range].slider:focus::-webkit-slider-runnable-track {
+  background: #545a5a;
+}
+input[type=range].slider::-moz-range-track {
+  width: 100%;
+  height: 6.9px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #484d4d;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+input[type=range].slider::-moz-range-thumb {
+  box-shadow: 0px 0px 1px #670000, 0px 0px 0px #810000;
+  border: 0px solid #ff1e00;
+  height: 13px;
+  width: 21px;
+  border-radius: 0px;
+  background: rgba(244, 83, 89, 0.93);
+  cursor: pointer;
+}
+input[type=range].slider::-ms-track {
+  width: 100%;
+  height: 6.9px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].slider::-ms-fill-lower {
+  background: #3c4040;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].slider::-ms-fill-upper {
+  background: #484d4d;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].slider::-ms-thumb {
+  box-shadow: 0px 0px 1px #670000, 0px 0px 0px #810000;
+  border: 0px solid #ff1e00;
+  height: 13px;
+  width: 21px;
+  border-radius: 0px;
+  background: rgba(244, 83, 89, 0.93);
+  cursor: pointer;
+  height: 6.9px;
+}
+input[type=range].slider:focus::-ms-fill-lower {
+  background: #484d4d;
+}
+input[type=range].slider:focus::-ms-fill-upper {
+  background: #545a5a;
+}
+
+#canvas-main{
+  z-index:0;
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  cursor:cell;
+}
+
+#backgroundColor{
+  z-index:-10;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color: #000000;
+}
+
+#backgroundGradient{
+  z-index:-9;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-size: cover;
+  background: url(http://agario.itseddy.me/res/backcolor.svg) no-repeat center center fixed;
+}
+
+#backgroundImage{
+  z-index:-8;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color:#000000;
+  background: url(http://agario.itseddy.me/res/backtriangle.svg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.connecting-panel{
+  position: fixed;
+  left: 50%;
+  z-index: 100;
+  top: 30px;
+  width: 400px;
+  text-align: center;
+  background-color: #222222;
+  margin: auto auto auto -175px;
+  border-radius: 15px;
+  padding: 5px 15px 5px 15px;
+  opacity:0.9;
+  color:#FFFFFF;
+}
+
+/* Bottom left */
+#chatOverlay{
+  left:10px;
+  bottom: 10px;
+  position: fixed;
+  z-index: 1;
+}
+#noty_container{
+  bottom: 50px;
+  left: 10px;
+  position: fixed;
+  width: 310px;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  z-index: 100;
+}
+.noty_bottomLeft_layout_container{
+  z-index:200;
+}
+.list-group-item-noty{
+  color: #CCCCCC;
+  background-color: rgba(0,0,0,0.7);
+  border-color: #333333;
+  border-width: 2px;
+  border-style: solid;
+  margin-top: 5px;
+}
+#sendMessage{
+  font-size: 20px;
+  display: inline-block;
+  background-color: rgba(0,0,0,0.4);
+  color: #CCCCCC;
+  height: 30px;
+  width: 310px;
+  border-color: #333333;
+  bottom:10px;
+  position: fixed;
+}
+
+#chatbox{
+  position: fixed;
+  bottom: 10px;
+  left: 5%;
+  width: 90%;
+}
+
+#mapServerloginPanelOverlapScreen{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+#mapServerloginPanel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  margin: 0px;
+  transform: translate(-50%, -50%);
+  height: 470px;
+  width: 400px;
+  color: #DDDDDD;
+  background-color: #333333;
+  background-clip: padding-box;
+  border: 4px double rgb(255,255,255);
+  border-radius: 6px;
+  box-shadow: 0px 0px 20px #000;
+}
+
+#mapServerLoginForm {
+  padding: 0 10px 0 10px;
+}
+
+#inputSettingPanel{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  margin: 0px;
+  transform: translate(-50%, -50%);
+  height: 150px;
+  width: 400px;
+  color: #DDDDDD;
+  background-color: #333333;
+  background-clip: padding-box;
+  border: 4px double rgb(255,255,255);
+  border-radius: 6px;
+  box-shadow: 0px 0px 20px #000;
+}
+#inputSettingPanelOverlapScreen{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.2);
+}
+
+#currentKeySequence{
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+#doneInputSetting{
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100px;
+}
+
+/* Main panel */
+
+#helloContainer{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 200;
+  margin: 0px;
+  transform: translate(-50%, -50%);
+}
+
+#OverlayBody{
+  height: 550px;
+  width: 700px;
+  position: relative;
+  color: #DDDDDD;
+  background-color: #333333;
+  background-clip: padding-box;
+  border: 4px double rgb(255,255,255);
+  border-radius: 6px;
+  outline: 0;
+  box-shadow: 0px 0px 20px #000;
+}
+#avatar{
+  display: block;
+  position: absolute;
+  height: 165px;
+  width: 165px;
+  z-index: 20;
+  top: 25px;
+  left: 25px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0px 0px 15px #976666;
+}
+#indicatorColorChooser{
+  border: none;
+  display: block;
+  position: absolute;
+  top: -25px;
+  left: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px #976666;
+}
+#indicator{
+  display: block;
+  position: absolute;
+  z-index: 30;
+  height: 176px;
+  width: 176px;
+  top: 19px;
+  left: 19px;
+  text-align: center;
+  -webkit-animation:spin 15s linear infinite;
+  -moz-animation:spin 15s linear infinite;
+  animation:spin 15s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg);  }  }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg);  }  }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg);  }  }
+
+#GameTab{
+  top: 50%;
+  padding: 10px;
+  position: absolute;
+  transform: translate(0, -50%);
+}
+
+#helloContainer[data-logged-in="1"] #loginButton{
+  display: none;
+}
+#helloContainer[data-logged-in="0"] #logoutButton{
+  display: none;
+}
+
+#announcement{
+  color: #999999;
+}
+#keybind{
+  color: #999999;
+}
+
+#announcement>.new{
+  color: #FFFFFF;
+}
+
+#OverlayContent{
+  padding: 0px;
+  height: 100%;
+}
+
+.tab-pane{
+  height:inherit;
+  padding: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.agario-profile-panel{
+  float: none;
+  background-color: #444444;
+  margin: 10px;
+}
+
+.progress{
+  margin-bottom: 0px;
+}
+
+.nav-overlaymenu{
+  background-color: #444444;
+  height: 100%;
+  padding: 0px;
+}
+
+.nav-overlaymenu>li>a{
+  color: #EEEEEE;
+}
+
+.nav-overlaymenu>li>a:hover{
+  background-color: #555555;
+}
+
+.nav-overlaymenu>li>a:focus{
+  background-color: transparent;
+}
+.nav-overlaymenu>li.active>a,
+.nav-overlaymenu>li.active>a:hover,
+.nav-overlaymenu>li.active>a:focus{
+  background-color: #555555;
+}
+
+.agario-profile-picture{
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #FFFFFF;
+  display: inline-block;
+}
+
+.agario-profile-name-container{
+  display: inline-block;
+}
+
+.agario-exp-bar{
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  width: 200px;
+  height: 35px;
+  margin-left: 10px;
+}
+
+.progress-bar-star{
+  display: inline-block;
+}
+
+.progress-bar-text{
+  position: absolute;
+  white-space: nowrap;
+  color: #222222;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,80 @@
+@import "compass/css3/animation";
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+
+$load-overlay-z-index: 10000;
+
+#loadOverlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  background-color: rgb(30,30,30);
+  z-index: $load-overlay-z-index;
+  overflow:hidden;
+}
+#loadOverlay.loadComplete{
+  @include transition(
+    opacity 1s ease-in
+    );
+  opacity: 0;
+}
+#loadOverlay > div{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+#loadOverlay > div > div{
+  position: absolute;
+  transform: rotate(-10deg);
+}
+#A0, #A1, #A2,
+#B0, #B1, #B2{
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid;
+  width: 100px;  height: 100px;
+  left: -50px; top: -50px;
+  animation:3s infinite;
+}
+#A0, #A1, #A2{background: #CC8; border-color: #883;}
+#B0, #B1, #B2{background: #88C; border-color: #338; animation-delay: -1.5s;}
+#A0, #B0{animation-name: cell0;}
+#A1, #B1{animation-name: cell1;}
+#A2, #B2{animation-name: cell2;}
+
+@mixin cell-common($rotate, $translatex, $translatey, $scale){
+  @include animation-timing-function(cubic-bezier(0.24, 0.12, 0.76, 0.63));
+  @include transform(rotate($rotate) translate($translatex, $translatey) scale($scale));
+  z-index: $scale * 1000 + $load-overlay-z-index;
+}
+
+@include keyframes(cell0){
+  95.33% , 100%, 0%       { @include cell-common(0deg, -60.35%,      0, 1);}
+  12%, 16.67%             { @include cell-common(0deg,  39.65%, 34.84%, 1);}
+  28.67%, 33.33%          { @include cell-common(0deg,  40.35%, 34.84%, 1.414);}
+  45.33%, 50%             { @include cell-common(0deg,  40.35%, 44.84%, .990);}
+  62%, 66.67%             { @include cell-common(0deg,  40.35%, 53.84%, 1);}
+  72.67%                  { @include cell-common(0deg,  40.35%, 43.84%, .707);}
+  78.67%, 83.33%, 95.32%  { @include cell-common(0deg,  60.35%, 34.84%, 0);}
+}
+@include keyframes(cell1){
+  95.33% , 100%, 0%   { @include cell-common(120deg, 40.35%, 34.84%, 1.414);}
+  12%, 16.67%         { @include cell-common(120deg, 40.35%, 44.84%, .990);}
+  28.67%, 33.33%      { @include cell-common(120deg, 40.35%, 53.84%, 1);}
+  39.33%              { @include cell-common(120deg, 40.35%, 43.84%, .707);}
+  45.33%, 50%, 61.99% { @include cell-common(120deg, 60.35%, 34.84%, 0);}
+  62%, 66.67%         { @include cell-common(120deg,-60.35%, 0     , 1);}
+  78.67%, 83.33%      { @include cell-common(120deg, 39.65%, 34.84%, 1);}
+}
+@include keyframes(cell2){
+  95.33% , 100%, 0%   { @include cell-common(240deg, 40.35%, 53.84%, 1);}
+  6%                  { @include cell-common(240deg, 40.35%, 43.84%, .707);}
+  12%, 16.67%, 28.66% { @include cell-common(240deg, 60.35%, 34.84%, 0);}
+  28.67%, 33.33%      { @include cell-common(240deg,-60.35%, 0     , 1);}
+  45.33%, 50%         { @include cell-common(240deg, 39.65%, 34.84%, 1);}
+  62%, 66.67%         { @include cell-common(240deg, 40.35%, 34.84%, 1.414);}
+  78.67%, 83.33%      { @include cell-common(240deg, 40.35%, 44.84%, .990);}
+}

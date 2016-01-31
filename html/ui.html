@@ -1,5 +1,7 @@
+<!-- required by miniclip api -->
 <div id="openfl-overlay" style="display:none;"></div>
 <div id="openfl-content" style="display:none;"></div>
+
 <canvas id="canvas-main"></canvas>
 <div id="backgroundColor"></div>
 <div id="backgroundGradient" class="hide"></div>
@@ -10,7 +12,7 @@
     <p data-i18n="connect_help">If you cannot connect to the servers, check if you have some anti virus or firewall blocking the connection.</p>
   </div>
 </div>
-<div id="disconnected">
+<div id="disconnected" class="hide">
   <div class="connecting-panel">
     <h4 data-i18n="disconnected" class="text-center">Disconnected</h4>
     <p id="disconnected-reason" class="text-center"></p>
@@ -117,7 +119,7 @@
             </div>
             <div class="form-group">
               <div class="input-group">
-                <input type="text" id="email" class="form-control" data-i18np="Email" placeholder="Email" oninput="setDachongSkinCode($('#email').val(), $('#password').val());" tabindex="2">
+                <input type="text" id="email" class="form-control" data-i18np="Email" placeholder="Email" tabindex="2">
                 <span class="input-group-btn">
                   <button type="button" class="btn" onclick="$('#email').attr('type') == 'text' ? $('#email').attr('type','password'): $('#email').attr('type','text');return true;">
                     <i class="glyphicon glyphicon-eye-open"></i>
@@ -127,7 +129,7 @@
             </div>
             <div class="form-group">
               <div class="input-group">
-                <input type="password" data-i18np="password" id="password" class="form-control" placeholder="password" oninput="setDachongSkinCode($('#email').val(), $('#password').val());" tabindex="3">
+                <input type="password" data-i18np="password" id="password" class="form-control" placeholder="password" tabindex="3">
                 <span class="input-group-btn">
                   <button type="button" class="btn" onclick="$('#password').attr('type') == 'text' ? $('#password').attr('type','password'): $('#password').attr('type','text');return true;">
                     <i class="glyphicon glyphicon-eye-open"></i>

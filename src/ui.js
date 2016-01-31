@@ -6,7 +6,7 @@ var ui = {
         $('body').html('');
     },
     init: function(html_ui){
-
+        $('body').append(html_ui);
     },
     loadAnimation: {
         start: function(html_load){
