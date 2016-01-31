@@ -16,6 +16,9 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
+                    browserifyOptions:{
+                        debug: true, /* for source maps */
+                    },
                     debug: true,
                     keepAlive: 'true',
                     watch: 'true',
