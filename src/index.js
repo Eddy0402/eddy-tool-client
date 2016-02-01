@@ -1,40 +1,14 @@
+'user strict';
+
 var ui = require('./ui');
 var settings = require('./settings');
 var keybind = require('./keybind');
 var i18n = require('./i18n');
-
-var defaultConfig = {
-    resource_base : 'http://127.0.0.1:8080/',
-    server_url    : '127.0.0.1:8000',
-};
+var config = require('./config');
 
 function LoadPlugin(GM, Config){
-    if(!Config){
-        Config = defaultConfig;
-    }
-
-    console.log('Config:', Config);
-    var Resource = {
-        html: {
-            base: Config.resource_base + 'html/',
-            initHead: 'inithead.html',
-            load: 'load.html',
-            ui: 'ui.html',
-        },
-        thirdParty: {
-            base: Config.resource_base + 'third_party/',
-            list: [
-                'discord.min.3.10.2.js',
-                'jquery.noty.packaged.min.js',
-                'jscolor.js',
-                'mcagario.js',
-                'misc.js',
-                'notytheme.js',
-                'lodash.core.js',
-            ],
-        },
-    };
-    console.log('Config:', Config);
+    config.override(Config);
+    console.log('Config:', config);
 
     function loadHTML(url, callback, isCached){
         if(!isCached){
@@ -62,7 +36,7 @@ function LoadPlugin(GM, Config){
     }
 
     function Init(){
-        loadHTML(Resource.html.base + Resource.html.ui, function(uiHtml){
+        loadHTML(config.resource.html.base + config.resource.html.ui, function(uiHtml){
             settings.init();
             keybind.init();
 
@@ -73,17 +47,17 @@ function LoadPlugin(GM, Config){
         });
     }
 
-    loadHTML(Resource.html.base + Resource.html.initHead,function(initHead){
-        ui.initBlank(Config.resource_base, initHead);
+    loadHTML(config.resource.html.base + config.resource.html.initHead,function(initHead){
+        ui.initBlank(config.resource_base, initHead);
         console.log('Initialized blank page');
 
-        loadHTML(Resource.html.base + Resource.html.load,function(load){
+        loadHTML(config.resource.html.base + config.resource.html.load,function(load){
             ui.loadAnimation.start(load);
 
             /* Load third-party libraries */
-            var pending = Resource.thirdParty.list.length;
+            var pending = config.resource.thirdParty.list.length;
             for(var i = 0,l = pending;i < l;++i){
-                loadScript(Resource.thirdParty.base+ Resource.thirdParty.list[i], function(){
+                loadScript(config.resource.thirdParty.base+ config.resource.thirdParty.list[i], function(){
                     if(--pending == 0){
                         /* all library loaded, start main process */
                         Init();
