@@ -1,4 +1,4 @@
-$.noty.themes.chatBoxTheme = {
+module.exports = {
     name: 'chatBoxTheme',
     modal: {
         css: {

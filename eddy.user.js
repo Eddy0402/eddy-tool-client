@@ -1,6 +1,5 @@
 // ==UserScript==
-//
-// @name         Eddy's plugin
+// @name         Eddy's tool
 // @namespace    https://github.com/Eddy0402
 // @contributer  Eddy
 // @version      2.0.0
@@ -12,7 +11,6 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-/* Don't run on frames or iframes, so don't runs multiple times */
 if (window.top != window.self) {
     return;
 }
@@ -31,8 +29,6 @@ var Config = {
     server_url    : '127.0.0.1:8000',
 };
 
-unsafeWindow.$ = unsafeWindow.jQuery = jQuery;
-
-$.getScript('http://127.0.0.1:8080/main.js', function(){
+$.getScript(Config.resource_base + 'main.js', function(){
     unsafeWindow.LoadPlugin(GM, Config);
 });

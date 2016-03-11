@@ -1,0 +1,14 @@
+{
+  "eqnull": true,
+  "eqeqeq": true,
+  "undef": true,
+  "latedef": true,
+  "browser": true,
+  "browserify": true,
+  "esnext": true,
+  "debug": true,
+  "jquery": true,
+  "globals": {
+      "console": true
+  }
+}

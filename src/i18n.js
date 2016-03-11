@@ -2,7 +2,7 @@
 
 var settings = require('./settings');
 
-const zhtw_dict = {
+var zhtw_dict = {
     leaderboard : "排行榜",
     unnamed_cell : "路人",
     score : "分數",
@@ -104,13 +104,16 @@ const zhtw_dict = {
     EnterMessage: '輸入聊天訊息...',
     Global: '公頻',
     span: '請勿洗頻，請過 %n 秒後再發言',
-    Skin: '內部 Skin 網址',
+    Skin: 'Skin 網址',
     SplitIndicator: '分裂優先度標示',
     Minimap: '小地圖伺服器',
     cross: '十字',
     TeammatesCross: '隊友的十字',
     PlayerName: '地圖上顯示名稱(關閉則為數字)',
     InGameName: '顯示遊戲內名稱',
+    Duplicate: '複製',
+    Delete: '刪除',
+    profile: 'Profile',
 
     ShowOverlay : '顯示主畫面',
     ToggleAdvanceInfomation: '切換進階提示(按著)',
@@ -153,7 +156,7 @@ const zhtw_dict = {
     ClearFocusTarget2 : "清除追蹤目標2",
 };
 
-const en_dict = {
+var en_dict = {
     leaderboard : "Leaderboard",
     unnamed_cell : "Unnamed cell",
     score : "Score",
@@ -255,12 +258,15 @@ const en_dict = {
     EnterMessage: 'Enter Message...',
     Global: 'Global',
     span: 'Please do not spam, talk after %n seconds',
-    Skin: '(private)Skin URL',
+    Skin: 'Skin URL',
     SplitIndicator: 'Split Indicator',
     cross: 'Cross',
     TeammatesCross: 'Teammate\'s cross',
     PlayerName: 'Show Name instead of ID',
     InGameName: 'Show In-game name',
+    Duplicate: 'Duplicate',
+    Delete: 'Delete',
+    profile: 'Profile',
 
     ShowOverlay : 'ShowOverlay ',
     ToggleAdvanceInfomation: 'Toggle advanced infomation',
@@ -308,8 +314,8 @@ var dicts = {
     "zhtw": zhtw_dict,
 };
 
-const DEFAULT_LANG = 'en';
-var dict = dicts["en"];
+var DEFAULT_LANG = 'en';
+var dict = dicts.en;
 
 function translate(a) {
     return dict[a] || ( '[' + a + ']' );
@@ -323,11 +329,11 @@ function switchLanguage(language){
     }else{
         dict = dicts[DEFAULT_LANG];
     }
-    jQuery("body").attr('data-language', settings.language);
-    jQuery("[data-i18n]").each(function(){
+    $("body").attr('data-language', settings.language);
+    $("[data-i18n]").each(function(){
         $(this).text(translate($(this).attr('data-i18n')));
     });
-    jQuery("[data-i18np]").each(function(){
+    $("[data-i18np]").each(function(){
         $(this).attr('placeholder', translate($(this).attr('data-i18np')));
     });
 }

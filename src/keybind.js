@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var storage = require('./storage');
 
 function genKeySequenceIndex(keySequence){
@@ -10,15 +11,17 @@ function genKeySequenceIndex(keySequence){
     return res;
 }
 function genKeySequenceReadable(keySequence){
-    return keySequence.length == 0 ? 'none'
-        : keySequence.map(function(val){ return keyCodeName[val] || val; }).join(' + ');
+    return keySequence.length === 0 ? 'none'
+        : keySequence.map(function(val){ return window.keyCodeName[val] || val; }).join(' + ');
 }
 
 function InitKeyBindObject(keybind, name ,optionsAndDefaults){
+    keybind.genKeySequenceIndex = genKeySequenceIndex;
+    keybind.genKeySequenceReadable = genKeySequenceReadable;
     keybind.action = {
         add: function(key, action){
             if(!this[key]) this[key] = [];
-            if(this[key].oindexOf(action) !== -1){
+            if(this[key].oindexOf(action) === -1){
                 this[key].push(action);
             }
         },
@@ -30,8 +33,11 @@ function InitKeyBindObject(keybind, name ,optionsAndDefaults){
         },
     };
     Object.defineProperty(keybind, 'action',{enumerable: false});
+    Object.defineProperty(keybind, 'init',{enumerable: false});
+    Object.defineProperty(keybind, 'genKeySequenceIndex',{enumerable: false});
+    Object.defineProperty(keybind, 'genKeySequenceReadable',{enumerable: false});
 
-    _.forEach(keybind, function(defaultValue, settingName){
+    _.forEach(optionsAndDefaults, function(defaultValue, settingName){
         var backingVar = '_' + settingName;
         keybind[backingVar] = storage.get(name + '_' + settingName, defaultValue);
 
@@ -56,27 +62,22 @@ function InitKeyBindObject(keybind, name ,optionsAndDefaults){
 }
 
 var keybindDefault = {
-    "ShowOverlay"                     : [257],
+    "ToggleOverlay"                   : [257],
     "ToggleAdvanceInfomation"         : [],
     "ToggleAdvanceInfomationPersist"  : [16],  // Shift
     "Chat"                            : [13],  // Enter
     "SwitchCell"                      : [9],   // Tab
     "Split"                           : [32],  // Space
 
-    "MacroFeedAndSpectate"            : [81],  // Q
-    "MacroFeed"                       : [],  // nothing
+    "SpectateAndToggleFreeSpectate"   : [81],  // Q
+    "MacroFeed"                       : [81],  // Q
     "Feed"                            : [87],  // W
     "ToggleVirusProtecter"            : [69],  // E
     "MacroSplit"                      : [82],  // R
     "MacroSplit50"                    : [],
     "MacroSplitTwice"                 : [84],  // T
-    "GrazerTargetReset"               : [79],  // O
-    "GrazerTargetFix"                 : [80],  // P
-    "GrazerTargetResetRequest"        : [219], // [
 
     "StopMove"                        : [83],  // S
-    "Grazer1"                         : [71],  // G
-    "Grazer2"                         : [72],  // H
     "ZoomLock"                        : [76],  // L
 
     "MapEvent_Feed"                   : [90],  // Z

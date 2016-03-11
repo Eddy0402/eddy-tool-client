@@ -4,7 +4,7 @@
 
 'use strict';
 
-var TextRenderObject = gamecore.Pooled('TextRenderObject',
+var TextRenderObject = window.gamecore.Pooled('TextRenderObject',
 {
     create: function(size, color, hasStroke, strokeColor){
         var newObj = this._super();
@@ -40,7 +40,7 @@ var TextRenderObject = gamecore.Pooled('TextRenderObject',
     ctx : null,
 
     setSize : function(size) {
-        if (this.size != size) {
+        if (this.size !== size) {
             this.size = size;
             var targetSize = this.getSize();
             if(this.cachedCanvas.width / targetSize.width < 0.6 ||
@@ -50,7 +50,7 @@ var TextRenderObject = gamecore.Pooled('TextRenderObject',
         }
     },
     setScale : function(scale) {
-        if (this.scale != scale) {
+        if (this.scale !== scale) {
             this.scale = scale;
             var targetSize = this.getSize();
             if(this.cachedCanvas.width / targetSize.width < 0.5 ||
@@ -60,19 +60,19 @@ var TextRenderObject = gamecore.Pooled('TextRenderObject',
         }
     },
     setStrokeColor : function(color) {
-        if (this.strokeColor != color) {
+        if (this.strokeColor !== color) {
             this.strokeColor = color;
             this.needRedraw = true;
         }
     },
     setColor : function(color) {
-        if (this.Color != color) {
+        if (this.Color !== color) {
             this.Color = color;
             this.needRedraw = true;
         }
     },
     setValue : function(text) {
-        if (text != this.textToDraw) {
+        if (text !== this.textToDraw) {
             this.textToDraw = text;
             this.needRedraw = true;
         }
@@ -120,6 +120,7 @@ var TextRenderObject = gamecore.Pooled('TextRenderObject',
 });
 
 module.exports = {
+    init: function(){},
     create: function(args){
         return TextRenderObject.create.apply(TextRenderObject, arguments);
     },

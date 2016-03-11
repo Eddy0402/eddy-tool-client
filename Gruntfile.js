@@ -6,12 +6,13 @@ module.exports = function(grunt) {
         'browserify': {
             options: {
                 extensions: ['.js'],
+                alias: { jquery : 'jquery-browserify' },
             },
             dist: {
                 options: {
                     debug: false,
                 },
-                src: ['build/**/*.min.js'],
+                src: ['src/index.js'],
                 dest: 'dist/main.js',
             },
             dev: {
@@ -20,10 +21,8 @@ module.exports = function(grunt) {
                         debug: true, /* for source maps */
                     },
                     debug: true,
-                    keepAlive: 'true',
-                    watch: 'true',
                 },
-                src: ['./src/**/*.js'],
+                src: ['./src/index.js'],
                 dest: 'dev/main.js',
             },
         },
@@ -40,9 +39,17 @@ module.exports = function(grunt) {
                 },
             }
         },
+        'jshint': {
+            options: {
+                jshintrc: '.jshintrc',
+                ignores: ['src/third_party/**/*.js'],
+            },
+            js: ['src/**/*.js'],
+        },
         'compass': {
             options: {
                 sassDir: 'sass',
+                fontsDir: 'assets/font'
             },
             dist: {
                 options: {
@@ -53,9 +60,26 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
-                    watch: true,
                     cssDir: 'dev/css',
                 },
+            },
+        },
+        'watch': {
+            options: {
+                spawn: true,
+                atBegin: true,
+            },
+            scripts: {
+                files: ['src/**/*.js'],
+                tasks: ['jshint:js', 'browserify:dev'],
+            },
+            css: {
+                files: ['sass/**/*.scss'],
+                tasks: ['compass:dev'],
+            },
+            html: {
+                files: ['src/**/*.js', 'sass/**/*.scss'],
+                tasks: ['cachebreaker:html'],
             },
         },
         'concurrent': {
@@ -63,17 +87,31 @@ module.exports = function(grunt) {
                 logConcurrentOutput: true,
             },
             dev: {
-                tasks: ['browserify:dev', 'compass:dev'],
+                tasks: ['watch:scripts', 'watch:css', 'watch:html'],
             },
         },
+        'cachebreaker': {
+            html: {
+                options: {
+                    match: ['main.js', 'css/ui.css', 'css/load.css'],
+                    replacement: 'time',
+                    position: 'append',
+                },
+                files: {
+                    src: ['html/index.html']
+                }
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-cache-breaker');
 
-    // Default task(s).
     grunt.registerTask('default', ['concurrent:dev']);
-    grunt.registerTask('dist', ['closure-compiler:dist', 'browserify:dist', 'compass:dist']);
+    grunt.registerTask('dist', ['jshint:js', 'browserify:dist', 'closure-compiler:dist', 'compass:dist']);
 
 };

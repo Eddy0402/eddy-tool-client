@@ -1,5 +1,22 @@
 'use strict';
 
+var cellColorMap = require('./entity/cellcolormap');
+
+function extend (target) {
+  for(var i=1; i<arguments.length; ++i) {
+    var from = arguments[i];
+    if(typeof from !== 'object') continue;
+    for(var j in from) {
+      if(from.hasOwnProperty(j)) {
+        target[j] = typeof from[j]==='object' ?
+          extend({}, target[j], from[j]) :
+          from[j];
+      }
+    }
+  }
+  return target;
+}
+
 var Config = {
     init: function(newConfig){
         var base = newConfig.resource_base || 'http://127.0.0.1:8080/';
@@ -13,30 +30,22 @@ var Config = {
                     load: 'load.html',
                     ui: 'ui.html',
                 },
-                thirdParty: {
-                    base: base + 'third_party/',
-                    list: [
-                        'discord.min.3.10.2.js',
-                        'jquery.noty.packaged.min.js',
-                        'jscolor.js',
-                        'mcagario.js',
-                        'misc.js',
-                        'notytheme.js',
-                        'lodash.core.js',
-                    ],
-                },
                 asset: {
                     base: base + 'assets/',
                     number: {
-                        darkbold : ['DarkBoldL.png', 'DarkBoldS.png'],
-                        dark : ['DarkL.png', 'DarkS.png'],
-                        light : ['LightL.png', 'LightS.png'],
+                        darkbold : ['NumberDarkBoldL.png', 'NumberDarkBoldS.png'],
+                        dark : ['NumberDarkL.png', 'NumberDarkS.png'],
+                        light : ['NumberLightL.png', 'NumberLightS.png'],
                     },
                 }
             },
-        }
-        this = $.extend(true, defaultConfig, newConfig);
+            cellColorMap: cellColorMap,
+        };
+        extend(this, defaultConfig, newConfig);
+    },
+    getCellColor: function(color){
+        return this.cellColorMap[color] || color;
     },
 };
 
-module.export = Config;
+module.exports = Config;

@@ -7,7 +7,7 @@
 var config = require('../config');
 
 var numbericTextImage = {};
-var NumberRenderObject = gamecore.Pooled('NumberRenderObject',
+var NumberRenderObject = window.gamecore.Pooled('NumberRenderObject',
 {
     create: function(size, type, hasBack){
         var newObj = this._super();
@@ -40,20 +40,33 @@ var NumberRenderObject = gamecore.Pooled('NumberRenderObject',
     ctx : null,
     hasBack: false,
 
+    setBack: function(back){
+        if (this.hasBack !== back) {
+            this.hasBack = back;
+            this.needRedraw = true;
+        }
+    },
+    setType: function(type){
+        if (this.type !== type) {
+            this.type = numbericTextImage[type];
+            this.needRedraw = true;
+        }
+    },
     setSize : function(size) {
-        if (this.size != size) {
+        if (this.size !== size) {
             this.size = size;
             this.needRedraw = true;
         }
     },
     setScale : function(scale) {
-        if (this.scale != scale) {
+        if (this.scale !== scale) {
             this.scale = scale;
             this.needRedraw = true;
         }
     },
     setValue : function(text) {
-        if (text != this.textToDraw) {
+        text = text.toString();
+        if (text !== this.textToDraw) {
             this.textToDraw = text;
             this.needRedraw = true;
         }
@@ -92,7 +105,7 @@ var NumberRenderObject = gamecore.Pooled('NumberRenderObject',
 
             for(var i = 0; i < textToDraw.length; ++i){
                 var index = this.text.indexOf(textToDraw.charAt(i));
-                if(index != -1){
+                if(index !== -1){
                     ctx.drawImage(
                         targetMipmap,
                         targetMipmap.width / this.text.length * index,
